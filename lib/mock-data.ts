@@ -195,3 +195,40 @@ export const quickActions = [
   { id: "send", label: "Send", icon: "↗", color: "blue" },
   { id: "receive", label: "Receive", icon: "↙", color: "emerald" }
 ];
+
+// Chart data for assets (30 days)
+export const generateAssetChartData = (baseValue: number, volatility: number = 0.05) => {
+  const data = [];
+  const days = 30;
+  
+  for (let i = 0; i < days; i++) {
+    const date = new Date();
+    date.setDate(date.getDate() - (days - i));
+    
+    const randomChange = (Math.random() - 0.5) * volatility;
+    const value = baseValue * (1 + randomChange * i / days);
+    
+    data.push({
+      timestamp: date.toISOString(),
+      value: value,
+      label: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+    });
+  }
+  
+  return data;
+};
+
+// BTC chart data
+export const btcChartData = generateAssetChartData(98234.56, 0.15);
+
+// ETH chart data
+export const ethChartData = generateAssetChartData(3789.23, 0.18);
+
+// USDT chart data
+export const usdtChartData = generateAssetChartData(1.00, 0.002);
+
+// BRL chart data
+export const brlChartData = generateAssetChartData(127543.89, 0.02);
+
+// USD chart data
+export const usdChartData = generateAssetChartData(25840.00, 0.01);
